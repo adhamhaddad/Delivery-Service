@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS parcels (
+    id SERIAL PRIMARY KEY,
+    sender_id INT NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    pick_up_address TEXT NOT NULL,
+    drop_off_address TEXT NOT NULL,
+    status VARCHAR(100) NOT NULL DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP
+);
