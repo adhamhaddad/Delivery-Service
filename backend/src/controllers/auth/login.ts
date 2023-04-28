@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { setAccessToken, setRefreshToken } from '../../utils/token';
 import Auth from '../../models/auth';
 import configs from '../../configs';
-
 const auth = new Auth();
 
 export const authUser = async (req: Request, res: Response) => {
@@ -16,6 +15,7 @@ export const authUser = async (req: Request, res: Response) => {
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
       sameSite: 'strict',
+      domain: 'localhost',
       secure: false,
       maxAge: configs.access_expires
     });
@@ -24,18 +24,29 @@ export const authUser = async (req: Request, res: Response) => {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       sameSite: 'strict',
+      domain: 'localhost',
       secure: false,
       maxAge: configs.refresh_expires
     });
-
+    const cookieOption = {
+      httpOnly: true,
+      sameSite: 'strict',
+      domain: 'localhost',
+      secure: false,
+      maxAge: configs.refresh_expires
+    };
     res.status(200).json({
       status: true,
-      data: { user: { ...response }, accessToken },
+      data: {
+        user: { ...response },
+        accessToken,
+        refreshToken: { value: refreshToken, options: cookieOption }
+      },
       message: 'User authenticated successfully.'
     });
   } catch (error) {
     res.status(400).json({
-      message: (error as Error).message
+      error: (error as Error).message
     });
   }
 };

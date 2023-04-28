@@ -117,7 +117,6 @@ CREATE TABLE IF NOT EXISTS orders (
     id SERIAL PRIMARY KEY,
     biker_id INT NOT NULL REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
     parcel_id INT NOT NULL REFERENCES parcels(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    delivered_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP,
     CONSTRAINT unique_biker_order UNIQUE (parcel_id, biker_id)

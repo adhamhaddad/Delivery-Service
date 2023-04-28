@@ -36,12 +36,14 @@ export const refreshAccessToken = async (req: Request, res: Response) => {
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
       sameSite: 'strict',
+      domain: 'localhost',
       secure: false,
       maxAge: configs.access_expires
     });
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       sameSite: 'strict',
+      domain: 'localhost',
       secure: false,
       maxAge: configs.refresh_expires
     });
@@ -51,7 +53,7 @@ export const refreshAccessToken = async (req: Request, res: Response) => {
     });
   } catch (error) {
     res.status(401).json({
-      message: (error as Error).message
+      error: (error as Error).message
     });
   }
 };

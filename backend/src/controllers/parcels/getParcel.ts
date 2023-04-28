@@ -5,7 +5,7 @@ const parcel = new Parcel();
 
 export const getParcel = async (req: Request, res: Response) => {
   try {
-    const response = await parcel.getParcel(req.params.id);
+    const response = await parcel.getUserParcels(req.params.id);
     res.status(200).json({
       data: response,
       message: 'Parcel fetched successfully.'

@@ -51,16 +51,28 @@ export const verifyAccessToken = async (
       req.user = { id: decoded.id, role: decoded.role };
       return next();
     } catch (err) {
+      const authorization = req.headers.authorization as string;
+
       if ((err as Error).name !== 'TokenExpiredError') {
         throw new Error('Invalid access token');
       }
 
-      const refreshToken = req.cookies.refreshToken;
+      // Get Refresh-Token
+      const refreshToken = req.get('X-Refresh-Token') as string;
+
+      // Rest of your route code goes here
       if (!refreshToken) {
         throw new Error('Refresh token missing');
       }
 
-      const decoded = await verifyRefreshToken(refreshToken);
+      const [bearer, token] = refreshToken.split(' ');
+      if (bearer !== 'Bearer' || !token) {
+        throw new Error(
+          'Invalid Authorization header format. Format is "Bearer <token>".'
+        );
+      }
+
+      const decoded = await verifyRefreshToken(token);
       const { id, first_name, last_name, username, role } = decoded;
       const accessToken = await setAccessToken({
         id,
@@ -75,6 +87,7 @@ export const verifyAccessToken = async (
       res.cookie('accessToken', accessToken, {
         httpOnly: true,
         sameSite: 'strict',
+        domain: 'localhost',
         secure: false,
         maxAge: configs.access_expires
       });

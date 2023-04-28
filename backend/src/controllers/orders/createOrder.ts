@@ -15,6 +15,7 @@ export const createOrder = async (req: Request, res: Response) => {
       throw new Error('User ID does not match the token id');
     }
     const response = await order.createOrder(req.body);
+    console.log(response);  
     io.emit('orders', { type: 'CREATE', data: response });
     res.status(201).json({
       data: response,

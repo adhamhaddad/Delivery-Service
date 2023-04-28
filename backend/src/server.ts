@@ -24,6 +24,7 @@ const corsOptions = {
     'Content-Type',
     'Accept',
     'X-Access-Token',
+    'X-Refresh-Token',
     'Authorization',
     'Access-Control-Allow-Origin',
     'Access-Control-Allow-Headers',
@@ -31,7 +32,8 @@ const corsOptions = {
   ],
   methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
   preflightContinue: true,
-  origin: '*'
+  origin: true,
+  credentials: true
 };
 
 // Middlewares
@@ -44,14 +46,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(router);
 
 // Express Server
-app.listen(port, () => {
+const server = http.createServer(app).listen(port, () => {
   console.log(`Backend server is listening on http://${ip}:${configs.port}`);
   console.log('Press CTRL+C to stop the server.');
 });
 
-const server = http.createServer(app);
-
-export const io = new Server(server, { cors: corsOptions });
+export const io = new Server(server, {
+  cors: corsOptions
+});
 
 io.on('connect', (socket) => {
   console.log('User connected', socket.id);

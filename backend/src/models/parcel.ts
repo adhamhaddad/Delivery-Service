@@ -57,14 +57,20 @@ class Parcel {
       return result.rows;
     });
   }
-  async getParcel(id: string): Promise<ParcelType> {
+  async getUserParcels(id: string): Promise<ParcelType[]> {
     return this.withConnection(async (connection: PoolClient) => {
       const query = {
-        text: 'SELECT * FROM parcels WHERE id=$1',
+        text: `
+          SELECT p.*, u.username
+          FROM parcels p
+          LEFT JOIN orders o ON o.parcel_id = p.id
+          LEFT JOIN users u ON u.id = o.biker_id
+          WHERE p.sender_id = $1;
+        `,
         values: [id]
       };
       const result = await connection.query(query);
-      return result.rows[0];
+      return result.rows;
     });
   }
   async updateParcel(id: string, p: ParcelType): Promise<ParcelType> {

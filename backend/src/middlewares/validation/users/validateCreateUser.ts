@@ -26,6 +26,13 @@ export const validateCreateUser = [
     .withMessage('username is empty')
     .isString()
     .withMessage('username must be string'),
+  body('role')
+    .exists()
+    .withMessage('role is missing from the body')
+    .notEmpty()
+    .withMessage('role is empty')
+    .isString()
+    .withMessage('role must be string'),
   body('email')
     .exists()
     .withMessage('Email is missing from the body')

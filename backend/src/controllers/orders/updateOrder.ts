@@ -17,7 +17,7 @@ export const updateOrder = async (req: Request, res: Response) => {
     }
     const response = await order.updateOrder(req.params.id);
     io.emit('orders', { type: 'UPDATE', data: response });
-    res.status(204).json({
+    res.status(203).json({
       data: response,
       message: 'Order updated successfully.'
     });

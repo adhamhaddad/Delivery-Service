@@ -20,8 +20,8 @@ const router = Router();
 
 router
   .post('/', validateCreateOrder, verifyToken, verifyBiker, createOrder)
-  .get('/', verifyToken, verifyBiker, getOrders)
-  .get('/:id', validateGetOrder, verifyToken, verifyBiker, getOrder)
+  .get('/:id', validateGetOrders, verifyToken, verifyBiker, getOrders)
+  // .get('/:id', validateGetOrder, verifyToken, verifyBiker, getOrder)
   .patch('/:id', validateUpdateOrder, verifyToken, verifyBiker, updateOrder)
   .delete('/:id', validateDeleteOrder, verifyToken, verifyBiker, deleteOrder);
 
