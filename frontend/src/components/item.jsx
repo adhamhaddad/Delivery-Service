@@ -30,7 +30,7 @@ const ParcelItem = ({ item, handleActions, filter }) => {
             <Button
               onClick={() => handleActions(item.id)}
               type='button'
-              text='PICK'
+              text='Pick up'
               style={{
                 backgroundColor: 'var(--background-dark)',
                 color: '#FFF',
