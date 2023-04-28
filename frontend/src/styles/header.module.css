@@ -1,0 +1,79 @@
+.header {
+    display: flex;
+    background-color: var(--background-dark);
+    color: #FFF;
+    align-items: center;
+    height: 60px;
+    justify-content: space-between;
+}
+
+.header h2 {
+    margin-left: 20px;
+}
+
+.header nav {
+    height: 100%;
+}
+
+.header nav ul {
+    display: flex;
+    height: inherit;
+}
+
+.header nav ul li {
+    height: inherit;
+    position: relative;
+    transition: .5s background ease-in-out
+}
+
+.header nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 0px 15px;
+    height: inherit;
+    transition: .5s background ease-in-out
+}
+
+.header nav ul li a.active,
+.header nav ul li a:hover {
+    background: #444;
+    transition: .5s background ease-in-out
+}
+
+.header nav ul li a i {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+}
+
+.dashboard {
+    background-image: url('../assets/icons/booster.png');
+}
+
+.todo {
+    background-image: url('../assets/icons/checklist.png');
+}
+
+.parcel {
+    background-image: url('../assets/icons/delivery-truck.png');
+}
+
+.header nav ul li.username>button {
+    position: absolute;
+    height: 40px;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #FFF;
+    border: 2px solid #888;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.header nav ul li.username>button:hover {
+    background-color: #ddd;
+}

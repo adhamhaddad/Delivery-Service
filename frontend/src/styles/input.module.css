@@ -1,0 +1,22 @@
+.input-box {
+    margin: 10px 0px;
+}
+
+.input-box label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.input-box input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 0px 10px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    outline: none;
+}
+
+.input-box input:focus {
+    border-color: var(--background-dark);
+}

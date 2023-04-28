@@ -1,0 +1,22 @@
+.todo-page {
+    padding: 10px;
+}
+
+/* Table */
+.todo-page table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.todo-page table th,
+.todo-page table td {
+    border: 1px solid var(--background-dark);
+    text-align: left;
+    padding: 8px;
+}
+
+.todo-page table th {
+    background-color: var(--background-dark);
+    color: #FFF;
+}

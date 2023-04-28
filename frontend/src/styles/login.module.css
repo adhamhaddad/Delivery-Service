@@ -1,0 +1,19 @@
+.login-page form,
+.register-page form {
+    width: 400px;
+    margin: auto;
+}
+
+
+.role label {
+    margin-right: 15px;
+}
+
+.role label input {
+    margin-left: 3px;
+}
+
+.register-hint {
+    padding: 10px 0px;
+    text-align: center;
+}
